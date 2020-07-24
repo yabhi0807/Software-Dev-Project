@@ -14,25 +14,6 @@
 	- Secured with google recaptcha service. 
 	- Works on both mobile, desktop and all ratio devices.
 
-### Technologies
-
-| GUI (front-end)  |  Backend Server |
-|------------------|-----------------|
-|  HTML5	   |  Python3 v3.8|
-| CSS3		   |  Django2 v2.2|
-| Javascript	   |  Cron	|
-| Bootstrap4 v4.4  |  Sqlite3(database)	|
-| JQuery	   |  		|
-| AJAX		   |  		|
-
-### Libraries used
- - django-cleanup
- - django-cron
- - django-filter
- - django-private-chat
- - linkedin-api
- - pillow
- - websockets
 	
 ### Project and environment setup
 ```bash
@@ -58,3 +39,14 @@ python manage.py runserver
 # in another terminal work on the virtual environment created
 python manage.py run_chat_server
 ```
+
+### Technologies
+
+| GUI (front-end)  |  Backend Server |
+|------------------|-----------------|
+|  HTML5	   |  Python3 v3.8|
+| CSS3		   |  Django2 v2.2|
+| Javascript	   |  Cron	|
+| Bootstrap4 v4.4  |  Sqlite3(database)	|
+| JQuery	   |  		|
+| AJAX		   |  		|
