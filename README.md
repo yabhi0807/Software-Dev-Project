@@ -1,4 +1,4 @@
-# ase-1-project	(Alumni Portal)
+# Software-Dev-Project (Web-App) Alumni Portal
 
 ### Features:
 - Authentication with email verification, change password, forgot password, update profile, delete user.
