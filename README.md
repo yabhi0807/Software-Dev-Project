@@ -40,7 +40,7 @@ python manage.py runserver
 python manage.py run_chat_server
 ```
 
-### Technologies
+### Techstack
 
 | GUI (front-end)  |  Backend Server |
 |------------------|-----------------|
