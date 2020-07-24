@@ -58,20 +58,3 @@ python manage.py runserver
 # in another terminal work on the virtual environment created
 python manage.py run_chat_server
 ```
-
-### registered users(for testing):
-
-- Admin: 
-	- username: venky 
-	- password: testpassword
-- Alumni: 
-	- username: venkatesh 
-	- password: testpassword
-
-
-### Contributors:
-- [P Venkatesh](https://github.com/venky012)
-- [P Sri Ranga](https://github.com/Pabbisettysriranga)
-- [G ManjuShree](https://github.com/manju1201)
-- [Abhishek](https://github.com/yabhi0807)
-- M Leela Madhuri
