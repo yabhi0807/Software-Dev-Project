@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+	{% block title %}Profile Page{% endblock title %}
+    {% block content %}
+    {% load static %}
+    <style>
+
+
+    body{
+        background: #F0F2F0;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #000C40, #F0F2F0);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #000C40, #F0F2F0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    .jobcard{
+            max-width: 400px;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: .25rem;
+        }
+        .jobtitle{
+          padding-right: 10px;
+          padding-left: 10px;
+          font-weight: bold;
+          font-size: 1.4rem;
+          font-style: oblique;
+          color: #5d5d5d;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          text-rendering: optimizeLegibility;
+          line-height: 1.6;
+          margin-bottom: 0.2rem;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        .categories{
+          padding-right: 10px;
+            padding-left: 10px;
+            margin-bottom: 1.4rem;
+            font-size: 0.8rem;
+        }
+        .tag{
+          padding-right: 10px;
+            padding-left: 10px;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        .deadline{
+          padding-right: 10px;
+            padding-left: 10px;
+        }
+        .bottom{
+          padding-right: 10px;
+            padding-left: 10px;
+            font-size: 0.9rem;
+          font-style: italic;
+        }
+        .job_img_cont{
+          padding: 0px;
+          margin-left: -0.1%;
+        }
+        .jobslist{
+          padding-top: 3%;
+        }
+        .jobpost{
+          background-image: url("{% static 'assets/jobs_images/jobspage.jpg' %}");
+          background-size:100% 100%;
+          text-align: center;
+          margin-top: 32px;
+          min-height:300px;
+          max-height: 500px;
+        }
+        .layer{
+          background-color: rgba(0,0,0,0.7);
+          position: absolute;
+          top: 80px;
+          left: 0;
+          width: -webkit-fill-available;
+          width:-moz-available;
+          height: 300px;
+        }
+        .jobpostbut{
+          max-width: 180px;
+        }
+        .jobs_h3{
+          font-size: 30px;font-family: 'Times New Roman', Times, serif;
+          font-weight: bolder;
+          color: white; 
+          padding-bottom: 10px;
+          margin-top: 34px;
+        }
+        @media screen and (max-width : 900px) {
+            .jobpost{
+              max-height: 240px;
+            }
+            .layer{
+              background-color: rgba(0,0,0,0.7);
+              position: absolute;
+              top: 80px;
+              left: 0;
+              width: -webkit-fill-available;
+              width:-moz-available;
+              height: 300px;
+            }
+            .jobs_h3{
+              font-size: 30px;font-family: 'Times New Roman', Times, serif;
+              font-weight: bolder;
+              color: white; 
+              padding-bottom: 20px;
+              margin-top: 34px;
+            }
+        }
+        @media screen and (max-width : 760px) {
+            .jobpostbut{
+              max-width: 150px;
+            }
+            .jobpost{
+              max-height: 280px;
+            }
+            .layer{
+              background-color: rgba(0,0,0,0.7);
+              position: absolute;
+              top: 80px;
+              left: 0;
+              width: -webkit-fill-available;
+              width:-moz-available;
+              height: 300px;
+            }
+            .jobs_h3{
+              font-size: 30px;
+              font-family: 'Times New Roman', Times, serif;
+              font-weight: bolder;
+              color: white;
+              padding-bottom: 20px;
+              margin-top: 38px;
+            }
+        }
+        @media screen and (max-width : 560px) {
+            .jobpostbut{
+              max-width: 140px;
+            }
+            .jobpost{
+              max-height: 300px;
+            }
+            .layer{
+              background-color: rgba(0,0,0,0.7);
+              position: absolute;
+              top: 80px;
+              left: 0;
+              width: -webkit-fill-available;
+              width:-moz-available;
+              height: 300px;
+            }
+            .jobs_h3{
+              font-size: 30px;
+              font-family: 'Times New Roman', Times, serif;
+              font-weight: bolder;
+              color: white;
+              padding-bottom: 20px;
+              margin-top: 38px;
+            }
+        }
+        .Postedby{
+          font-size: 15px;
+          float: right;
+          color: grey;
+        }
+
+    .emp-profile{
+        padding: 3%;
+        margin-top: 4%;
+        margin-bottom: 3%;
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+    @media (max-width: 768px) {
+        .emp-profile{
+            margin-top:9%;
+            width:309px;
+        }
+    }
+    .profile-img{
+        text-align: center;
+    }
+    .profile-img img{
+        width: 70%;
+        height: 100%;
+    }
+    .profile-img .file {
+        position: relative;
+        overflow: hidden;
+        margin-top: -20%;
+        width: 70%;
+        border: none;
+        border-radius: 0;
+        font-size: 15px;
+        background: #212529b8;
+    }
+    .profile-img .file input {
+        position: absolute;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+    .profile-head h5{
+        color: #333;
+    }
+    .profile-head h6{
+        color: #0062cc;
+    }
+    .profile-edit-btn{
+        border: none;
+        border-radius: 1.5rem;
+        width: 70%;
+        padding: 2%;
+        font-weight: 600;
+        color: #6c757d;
+        cursor: pointer;
+    }
+    .proile-rating{
+        font-size: 12px;
+        color: #818182;
+        margin-top: 5%;
+    }
+    .proile-rating span{
+        color: #495057;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .profile-head .nav-tabs{
+        margin-bottom:5%;
+    }
+    .profile-head .nav-tabs .nav-link{
+        font-weight:600;
+        border: none;
+    }
+    .profile-head .nav-tabs .nav-link.active{
+        border: none;
+        border-bottom:2px solid #0062cc;
+    }
+    .profile-work{
+        padding: 14%;
+        margin-top: -15%;
+    }
+    .profile-work p{
+        font-size: 12px;
+        color: #818182;
+        font-weight: 600;
+        margin-top: 10%;
+    }
+    .profile-work a{
+        text-decoration: none;
+        color: #495057;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    .profile-work ul{
+        list-style: none;
+    }
+    .profile-tab label{
+        font-weight: 600;
+    }
+    .profile-tab p{
+        font-weight: 600;
+        color: #0062cc;
+    }
+    #particles-js{
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: 50% 50%;
+        display: ruby-text-container;
+        top: 0px;
+        z-index:1;
+    }
+    .profile-img img:hover{
+        background: black;
+        opacity: 0.5;
+        border-radius:50%;
+    }
+    </style>
+    <style>
+    .container1 {
+        position: relative;
+        width: 150px;
+        height:150px;
+    }
+
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 75%;
+        left: 75%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .container1:hover .image {
+        opacity: 0.3;
+    }
+
+    .container1:hover .middle {
+        opacity: 1;
+    }
+
+    .text {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        padding: 16px 32px;
+    }
+    .profile-head .nav-tabs .nav-link {
+        font-size:18px;
+    }
+    </style>
+<style>
+
+
+/* Extra styles for the cancel button */
+.cancelbtn11 {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn11, .signupbtn11 {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container11 {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal11 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content11 {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+ 
+/* The Close Button (x) */
+.close11 {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close11:hover,
+.close11:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix11::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn11, .signupbtn11 {
+     width: 100%;
+  }
+}
+
+</style>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                        <div class="profile-img" style="height:218px;width:247px;border-radius:50%;">
+                            {% if get_user.avatar %}
+                                <div class="container1">
+                                    <img src="{{ get_user.avatar.url }}" alt="Avatar" class="image"  style="height:218px;width:247px;border-radius:50%;">
+                                    {% if request.user.username == get_user.username %}
+                                        <a href="{% url 'upload_photo' %}">
+                                            <div class="middle">
+                                                <div class="text btn btn-primary" style="border-radius:50%;"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% else %}
+                                <div class="container1">
+                                    <img src="{% static 'profile/default_symbol.png' %}" alt="Avatar" class="image"  style="height:218px;width:247px;border-radius:50%;">
+                                    {% if request.user.username == get_user.username %}
+                                        <a href="{% url 'upload_photo' %}">
+                                            <div class="middle">
+                                                <div class="text btn btn-primary" style="border-radius:50%;"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h4>
+                            {{ get_user.summary }}
+                        </h4>
+                        <h6>@{{ get_user.username }}</h6>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top:20%;width:299px;">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="linkedin-tab" data-toggle="tab" href="#linkedin" role="tab" aria-controls="linkedin" aria-selected="false">Linkedin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                {% if request.user.username == get_user.username %}
+                    <div class="col-sm-2">
+                        <a href="{% url 'update_profile' %}" class="btn btn-primary" style="border-radius:50%"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>WORK LINK</p>
+                        {% if get_user.linkedin_url %}
+                            <a href="{{ get_user.linkedin_url }}" target="blank"><i class="fa fa-linkedin" style="font-size:24px"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {% else %}
+                        {% endif %}
+                        {% if get_user.github_url %}
+                            <a href="{{ get_user.github_url }}" target="blank"><i class="fa fa-github" style="font-size:24px"></i></a><br/>
+                        {% else %}
+                        {% endif %}
+                        {% if get_user.webpage_url %}
+                            <a href="{{ get_user.webpage_url }}" target="blank">Portfolio</a><br/>
+                        {% else %}
+                        {% endif %}
+                        {% if request.user.username == get_user.username %}
+                            <p>Account settings</p>
+                            <a href="{% url 'change_password' %}">Change Password</a><br>
+                            {% if user.is_superuser %}
+                                <a href="{% url 'queries_list' %}">Queries</a><br>
+                                <a href="{% url 'searchpage' %}">Search Alumni</a><br>
+                            {% endif %}
+                            {% if not user.is_superuser %}
+                                <a href="{% url 'searchalumni' %}">Search Alumni</a><br>
+                                <p class="btn btn-danger" style="color:white;" onclick="document.getElementById('id01').style.display='block'">Delete account</p><br>
+                            {% endif %}
+                        {% endif %}
+                        {% if request.user.username != get_user.username  %}
+                            <a href="{% url 'dialogs_detail' username=get_user.username %}"><img src="{% static 'profile/message.png' %}" alt="Avatar" class="image"  style="height:30px;width:30px;display: inline;padding-right: 2px;">Message</a><br>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{ get_user.first_name }} {{ get_user.last_name }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email Id</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{ get_user.email }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Phone no.</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{ get_user.phone_number }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Company</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{ get_user.company }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Place</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{ get_user.place }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Passed out year</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{ get_user.passout_year }}</p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <label>Jobs Posted</label>
+                            <div class="float-right">
+                                {% if request.user.username == get_user.username %}
+                                    <a class="btn btn-primary" href="{% url 'post_job' %}">Post job</a>
+                                {% endif %}
+                            </div>
+                            <div id="joblistid" class="jobslist">
+                                <div class="container">
+                                    
+                                    
+                                    <div class="row ">
+                                    {% if jobslist %}
+                                        {% for jobs in jobslist %}
+                                        <div class="col-md-6 col-sm-6 col-xs-8 col-lg-4">
+                                            <div class="jobcard mb-4 box-shadow">         
+                                                <div class="job_img_cont"> 
+                                                    <img class="img-fluid" src="{% static jobs.imgSrc %}" style="max-width: 100%; height:auto; padding-bottom: 3%;" alt="#">
+                                                </div>    
+                                                <div class="deadline">
+                                                    <p class="deadline text-right"><span style="font-size: 0.8rem;color:#2184ed; font-style: italic;font-weight: bold;">Apply before </span><span>{{jobs.last_date|date:"M d, Y"}}</span></p>
+                                                </div>   
+                                                    
+                                                <p class="jobtitle">{{jobs.job_title}}</p>
+                                                <p class="categories">{{jobs.category}}</p>
+                                                
+                                                <p class="tag"><em><span>Salary: </span></em>{{jobs.salary}}</p>
+                                                
+                                                <p class="tag"><em><span>Experience: </span></em>{{jobs.experience}}</p>
+                                                
+                                                <div class="bottom">
+                                                <p class="company text-right"><span class="highlight">{{jobs.company}}</span>, <span>{{jobs.place}}</span></p>
+                                                <a class="btn btn-danger float-right" href="{% url 'delete_job' id=jobs.id  %}">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="container jumbotron thank_you" style="margin-top:4%;margin-bottom:4%;text-align:center;background-color: #bbf0a3;">
+                                            <h1>No jobs are posted by alumni</h1>
+                                            <p><strong>Have a tea</strong> and visit again :)</p>
+                                            <hr>
+                                            <p>Having trouble? <a href="{% url 'contactform' %}">Contact us</a></p>
+                                        </div>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <label>Blog Posts</label>
+                            <div class="float-right">
+                                {% if request.user.username == get_user.username %}
+                                    <a class="btn btn-primary" href="{% url 'post-create' %}">Create blog post</a>
+                                {% endif %}
+                            </div>
+                            {% if posts %}
+                                {% for post in posts %}
+                                <div class="container" style="background-color:rgba(0, 2, 8, 0.72)">
+                                    {% if post.author.avatar %}
+                                        <img src="{{ post.author.avatar.url }}" alt="Avatar" class="image"  style="height:50px;width:50px;float:left;border-radius:50%;">
+                                    {% else %}
+                                        <img src="{% static 'profile/default_symbol.png' %}" alt="Avatar" class="image"  style="height:50px;width:50px;float:left;border-radius:50%;">
+                                    {% endif %}
+                                        <div style="padding:15px;"><br>
+                                            <h5><a class="mr-2" href="{% url 'profile_page' post.author.username %}" >Author: {{ post.author }}</a></h5>
+                                            <small><i style="color:white">{{ post.date_posted|date:"F d, Y" }}</i></small>
+                                            <h2><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                                        <p style="text-align: center;">{{ post.content }}</p>
+                                        <br>
+                                        </div> 
+                                    </div><br>
+                                {% endfor %}
+                            {% else %}
+                                <div class="container jumbotron thank_you" style="margin-top:4%;margin-bottom:4%;text-align:center;background-color: #bbf0a3;">
+                                    <h1>No posts are posted by alumni.</h1>
+                                    <p><strong>Have a tea</strong> and visit again :)</p>
+                                    <hr>
+                                    <p>Having trouble? <a href="{% url 'contactform' %}">Contact us</a></p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="tab-pane fade" id="linkedin" role="tabpanel" aria-labelledby="linkedin-tab">
+                        {% if experience or education or skills or location %}
+                                {% if location %}
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Place </label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p>{{ location }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if experience %}
+                                    <h4>Experience</h4>
+                                    {% for lst in experience %}
+                                        {% if lst|length_is:4 %}
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>Company </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <p>{{ lst.companyName }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>Title</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <p>{{ lst.title }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>Duration</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <p>{{ lst.startMonth }}/{{ lst.startYear }} - Present</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        {% elif lst|length_is:6 %}
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>Company </label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <p>{{ lst.companyName }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>Title</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <p>{{ lst.title }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>Duration</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <p>{{ lst.startMonth }}/{{ lst.startYear }} - {{ lst.endMonth }}/{{ lst.endYear }}</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                {% if skills %}
+                                    <h4>Skills</h4>
+                                    {% for i in skills %}
+                                        <p class="btn" style="cursor:default;">{{ i }}</p>
+                                    {% endfor %}     
+                                    <hr>
+                                {% endif %}
+                                {% if education %}
+                                    <h4>Education</h4>
+                                    {% for lst in education %}
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>College Name </label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>{{ lst.schoolName }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Degree</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>{{ lst.degreeName }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Field of Study</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>{{ lst.fieldOfStudy }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Duration</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>{{ lst.startYear }} - {{ lst.endYear }}</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    {% endfor %}
+                                {% endif %}
+                            {% else %}
+                                <div class="container jumbotron thank_you" style="margin-top:4%;margin-bottom:4%;text-align:center;background-color: #bbf0a3;">
+                                    <p><strong>Have a tea</strong> and visit again :)</p>
+                                    <p>We are updating your profile</p>
+                                    <hr>
+                                    <p>Having trouble? <a href="{% url 'contactform' %}">Contact us</a></p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>           
+    </div>
+
+<div id="id01" class="modal11" style="top:5%;">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close11" title="Close Modal">&times;</span>
+  <div class="modal-content11">
+    <div class="container11">
+      <h5>Are you sure you want to delete your account?</h5>
+
+      <p>By deleting your account you will lost all the information on this website and you can never getback.</p>
+
+      <div class="clearfix11">
+        <a onclick="document.getElementById('id01').style.display='none'" class="btn btn-classic">Cancel</a>
+        <a href="{% url 'delete_user' %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+    </div>
+</div>
+
+{% endblock content %}

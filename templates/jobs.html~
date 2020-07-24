@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Jobs
+{% endblock title %}
+{% block content %}
+    <style>
+        .jobcard{
+            max-width: 400px;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: .25rem;
+        }
+        .jobtitle{
+          padding-right: 10px;
+          padding-left: 10px;
+          font-weight: bold;
+          font-size: 1.4rem;
+          font-style: oblique;
+          color: #5d5d5d;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          text-rendering: optimizeLegibility;
+          line-height: 1.6;
+          margin-bottom: 0.2rem;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+        .categories{
+          padding-right: 10px;
+            padding-left: 10px;
+            margin-bottom: 1.4rem;
+            font-size: 0.8rem;
+        }
+        .tag{
+          padding-right: 10px;
+            padding-left: 10px;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        .deadline{
+          padding-right: 10px;
+            padding-left: 10px;
+        }
+        .bottom{
+          padding-right: 10px;
+            padding-left: 10px;
+            font-size: 0.9rem;
+          font-style: italic;
+        }
+        .job_img_cont{
+          padding: 0px;
+          margin-left: -0.1%;
+        }
+        .jobslist{
+          padding-top: 3%;
+        }
+        .jobpost{
+          background-image: url("{% static 'assets/jobs_images/jobspage.jpg' %}");
+          background-size:100% 100%;
+          text-align: center;
+          margin-top: 32px;
+          min-height:300px;
+          max-height: 500px;
+        }
+        .layer{
+          background-color: rgba(0,0,0,0.7);
+          position: absolute;
+          top: 80px;
+          left: 0;
+          width: -webkit-fill-available;
+          width:-moz-available;
+          height: 300px;
+        }
+        .jobpostbut{
+          max-width: 180px;
+        }
+        .jobs_h3{
+          font-size: 30px;font-family: 'Times New Roman', Times, serif;
+          font-weight: bolder;
+          color: white; 
+          padding-bottom: 10px;
+          margin-top: 34px;
+        }
+        @media screen and (max-width : 900px) {
+            .jobpost{
+              max-height: 240px;
+            }
+            .layer{
+              background-color: rgba(0,0,0,0.7);
+              position: absolute;
+              top: 80px;
+              left: 0;
+              width: -webkit-fill-available;
+              width:-moz-available;
+              height: 300px;
+            }
+            .jobs_h3{
+              font-size: 30px;font-family: 'Times New Roman', Times, serif;
+              font-weight: bolder;
+              color: white; 
+              padding-bottom: 20px;
+              margin-top: 34px;
+            }
+        }
+        @media screen and (max-width : 760px) {
+            .jobpostbut{
+              max-width: 150px;
+            }
+            .jobpost{
+              max-height: 280px;
+            }
+            .layer{
+              background-color: rgba(0,0,0,0.7);
+              position: absolute;
+              top: 80px;
+              left: 0;
+              width: -webkit-fill-available;
+              width:-moz-available;
+              height: 300px;
+            }
+            .jobs_h3{
+              font-size: 30px;
+              font-family: 'Times New Roman', Times, serif;
+              font-weight: bolder;
+              color: white;
+              padding-bottom: 20px;
+              margin-top: 38px;
+            }
+        }
+        @media screen and (max-width : 560px) {
+            .jobpostbut{
+              max-width: 140px;
+            }
+            .jobpost{
+              max-height: 300px;
+            }
+            .layer{
+              background-color: rgba(0,0,0,0.7);
+              position: absolute;
+              top: 80px;
+              left: 0;
+              width: -webkit-fill-available;
+              width:-moz-available;
+              height: 300px;
+            }
+            .jobs_h3{
+              font-size: 30px;
+              font-family: 'Times New Roman', Times, serif;
+              font-weight: bolder;
+              color: white;
+              padding-bottom: 20px;
+              margin-top: 38px;
+            }
+        }
+        .Postedby{
+          font-size: 15px;
+          float: right;
+          color: grey;
+        }
+    </style>
+    <div class="jobpost jumbotron">
+      <div class="layer">
+        <h3 class="jobs_h3">Jobs</h3>
+        <a href="{% url 'post_job' %}"><img class="jobpostbut" src="{% static 'assets/jobs_images/post-a-job.png' %}" alt="" style="padding-top: 30px;margin-top: 100px;"></a>
+      </div>
+    </div>
+    <div id="joblistid" class="jobslist">
+        <div class="container">
+          <div class="row ">
+          {% if jobslist %}
+            {% for jobs in jobslist %}
+            <div class="col-md-6 col-sm-6 col-xs-8 col-lg-4">
+              <div class="jobcard mb-4 box-shadow">         
+                    <div class="job_img_cont">
+                        <img class="img-fluid" src="{% static jobs.imgSrc %}" style="max-width: 100%; height:auto; padding-bottom: 3%;" alt="#">
+                    </div>    
+                    <div class="deadline">
+                        <p class="deadline text-right"><span style="font-size: 0.8rem;color:#2184ed; font-style: italic;font-weight: bold;">Apply before </span><span>{{jobs.last_date}}</span></p>
+                    </div>   
+                          
+                    <p class="jobtitle">{{jobs.job_title}}</p>
+                    <p class="categories">{{jobs.category}}</p>
+                    
+                    <p class="tag"><em><span>Salary: </span></em>{{jobs.salary}}</p>
+                    
+                    <p class="tag"><em><span>Experience: </span></em>{{jobs.experience}}</p>
+                    
+                    <div class="bottom">
+                      <p class="company text-right"><span class="highlight">{{jobs.company}}</span>, <span>{{jobs.place}}</span></p>
+                      <p class="Postedby">Posted by:<a href="{% url 'profile_page' username=jobs.user.username %}" style="color:blue">{{jobs.user.username}}</a></p>
+                    </div>
+              </div>
+            </div>
+            {% endfor %}
+          {% else %}
+             <div class="container jumbotron thank_you" style="margin-top:4%;margin-bottom:4%;text-align:center;background-color: #bbf0a3;">
+				<h1>No jobs are posted by alumni</h1>
+				<p><strong>Have a tea</strong> and visit again :)</p>
+				<hr>
+				<p>Having trouble? <a href="{% url 'contactform' %}">Contact us</a></p>
+			</div>
+          {% endif %}
+        </div>
+    </div>
+    </div>
+{% endblock content %}
