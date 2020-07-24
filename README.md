@@ -32,7 +32,9 @@ pip install -r requirements.txt
 
 # go to project folder
 cd software-dev-project/
+```
 
+```
 # you need two terminals to run our project one for running the django server and other for running the chat server
 python manage.py runserver
 
