@@ -2,14 +2,13 @@
 
 ### Features:
 - Authentication with email verification, change password, forgot password, update profile, delete user.
-- Updating user profile by getting data from linkedin on regular basis using cron jobs.
-- Staff can send mails to selected alumni. 
+- Updating user profile by getting data from linkedin on regular basis using cron-job.
 - Alumni can contact other alumni through message box integrated in our site.
-- Anyone can contact the alumni office easily and alumni can mail them through our website.
+- Anyone can contact the alumni office easily and alumni can mail them through our website (There is a limit for a user in a day).
 - Alumni can post the jobs/internships present in their company through our jobs page.
 - Events and gallery info.
 - Blog to share their expereinces with the community.
-- Donations and giving back page to help the students in different ways.
+- Donations and giving back page to help the students/institute.
 - Additional:
 	- Secured with google recaptcha service. 
 	- Works on both mobile, desktop and all ratio devices.
