@@ -44,7 +44,7 @@ python3 -m venv env
 source ./env/bin/activate
 
 # Clone repository
-git clone https://github.com/venky012/ase-1-site.git
+git clone https://github.com/yabhi0807/Software-Dev-Project.git
 
 # Install the requirement of the project in the virtual environment created 
 pip install -r requirements.txt
